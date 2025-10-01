@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Users, Plus, Search, Filter, MoreVertical } from 'lucide-react';
 import { mockInterns } from '../../data/mockData';
 import InternDetailModal from '../Modals/InternDetailModal';
+import InternFormModal from '../Modals/InternFormModal';
 
 export default function Interns() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [showInternDetail, setShowInternDetail] = useState(false);
+  const [showInternForm, setShowInternForm] = useState(false);
   const [filterDepartment, setFilterDepartment] = useState('');
 
   const filteredInterns = mockInterns.filter(intern => {
@@ -24,6 +26,11 @@ export default function Interns() {
     setShowInternDetail(true);
   };
 
+  const handleAddIntern = (internData: any) => {
+    console.log('New intern added:', internData);
+    setShowInternForm(false);
+  };
+
   return (
     <div className="space-y-6 mt-0 md:mt-[90px]">
       {/* Header */}
@@ -32,9 +39,12 @@ export default function Interns() {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Interns</h2>
           <p className="text-gray-600 dark:text-gray-300 mt-1">Manage and track your intern workforce</p>
         </div>
-        <button className="mt-4 sm:mt-0 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-200 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105">
+        <button
+          onClick={() => setShowInternForm(true)}
+          className="mt-4 sm:mt-0 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-200 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
           <Plus className="h-4 w-4" />
-          <span>Ajoutée un stagiaire</span>
+          <span>Ajouter un stagiaire</span>
         </button>
       </div>
 
@@ -131,13 +141,20 @@ export default function Interns() {
       </div>
 
       {/* Intern Detail Modal */}
-      <InternDetailModal 
+      <InternDetailModal
         intern={selectedIntern}
         isOpen={showInternDetail}
         onClose={() => {
           setShowInternDetail(false);
           setSelectedIntern(null);
         }}
+      />
+
+      {/* Intern Form Modal */}
+      <InternFormModal
+        isOpen={showInternForm}
+        onClose={() => setShowInternForm(false)}
+        onSubmit={handleAddIntern}
       />
     </div>
   );

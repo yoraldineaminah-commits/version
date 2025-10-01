@@ -2,7 +2,7 @@ import React from 'react';
 import { X, Menu } from 'lucide-react';
 
 interface MobileMenuProps {
-  isOpen: false;
+  isOpen: boolean;
   onToggle: () => void;
 }
 

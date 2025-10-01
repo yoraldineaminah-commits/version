@@ -6,9 +6,7 @@ import { progressData, departmentData, mockInterns, mockProjects, mockTasks } fr
 export default function Reports() {
   const [generatingReport, setGeneratingReport] = useState(false);
 
-  
-
-  const generateOldTextReport = () => {
+  const generateGlobalReport = () => {
     setGeneratingReport(true);
 
     const totalInterns = mockInterns.length;
