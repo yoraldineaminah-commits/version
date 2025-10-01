@@ -70,14 +70,6 @@ function App() {
       <main className="main-content p-4 md:p-6">
         {renderContent()}
       </main>
-      
-      {/* Mobile overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
     </div>
     </ThemeProvider>
   );
